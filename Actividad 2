@@ -1,0 +1,59 @@
+import java.util.Scanner;
+public class Main {
+
+    private String nombre;
+    private double[] calificaciones = new double[5];
+    public double calcularPromedio (double[] notas){
+        double suma = 0;
+        for (double nota:notas) {
+            suma += nota;
+        }
+        return suma/notas.length;
+    }
+public char obtenerCalificacionFinal (double promedio) {
+        if (promedio <= 50){
+            return 'F';
+        }
+        else if (promedio <=60) {
+            return 'E';
+        }
+        else if (promedio <=70) {
+            return 'D';
+        }
+        else if (promedio <=80) {
+            return 'C';
+        }
+        else if (promedio <=90) {
+            return 'B';
+        }
+        else {
+            return 'A';
+        }
+}
+public void imprimirResultados(String nombreEstudiante, double[] notas, double promedio, char calificacionLetra){
+        System.out.println("Nombre del Estudiante: " + nombreEstudiante);
+        for(int i=0; i<notas.length; i++) {
+            System.out.println("Calificacion: " + (i+1)+": " +notas [i]);
+        }
+        System.out.println("Promedio: " + promedio);
+        System.out.println("Calificacion: " + calificacionLetra);
+}
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Main alumno = new Main();
+        System.out.print("Ingrese el nombre del estudiante: ");
+        alumno.nombre = scanner.nextLine();
+
+        System.out.println("Ingresa las calificaciones de las cinco materias: ");
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Materia " + (i + 1) + ": ");
+            alumno.calificaciones[i] = scanner.nextDouble();
+        }
+        System.out.println("Resultados");
+        double prom = alumno.calcularPromedio(alumno.calificaciones);
+        char letra = alumno.obtenerCalificacionFinal(prom);
+
+        alumno.imprimirResultados(alumno.nombre, alumno.calificaciones, prom, letra);
+        scanner.close();
+    }
+    }
